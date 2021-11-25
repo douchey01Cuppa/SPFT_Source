@@ -37,7 +37,7 @@ jobs:
       run: |
         chmod +x make.sh
         ./make.sh release
-        cd /home/runner/work/SPFT_Source-1/_Output/linux/release/
+        cd /home/runner/work/SPFT_Source/_Output/linux/release/
          /usr/lib/qt5/bin/qmake -o Makefile ../../../SPFT_Source/SPFlashToolV6.pro -spec linux-g++-64 CONFIG+=release
 
     - name: Setup tmate session #setup tmate sessions ONLY if above step(build) fails
