@@ -691,7 +691,7 @@ void MainWindow::connectSignals()
     connect(ui->tabWidget, &QTabWidget::currentChanged, this, &MainWindow::slot_current_tab_page_changed);
     connect(m_option_dialog, &OptionDialog::signal_auto_polling_clicked, this, &MainWindow::slot_enable_auto_polling_clicked);
     connect(m_processing_dialog, SIGNAL(user_cancel_processing()),this, SLOT(slot_UserCancelLoadFlashXml()));
-    connect(NetworkInft::instance().get(), &NetworkInft::signal_network_connection_changed, this, &MainWindow::slot_show_network_connected);
+    connect(NetworkInft::instance().data(), &NetworkInft::signal_network_connection_changed, this, &MainWindow::slot_show_network_connected);
 }
 
 void MainWindow::initMembers()
