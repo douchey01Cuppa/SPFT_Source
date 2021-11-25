@@ -16,14 +16,29 @@ jobs:
         sudo apt install qt5-default curl   libqt5serialport5-dev libqt5xmlpatterns5-dev libqtwebkit-dev
     - name: Checkout Code
       uses: actions/checkout@master   
+    - name: Cache
+      id: cache-build
+      uses: actions/cache@v2.1.7
+      env: 
+        cache-name: build
+      with:
+        path: |
+         ~/cache
+          /home/runner/work/SPFT_Source-1/_Output/linux/release/
+          /home/runner/work/SPFT_Source-1/_
+        key: ${{ runner.os }}-build-${{env.cache-name}}-${{ hashFiles('**/lockfiles') }}  
+        restore-keys: |
+         ${{ runner.os }}-build-${{env.cache-name}}-
+         ${{ runner.os }}-build-
+         ${{ runner.os }}-
     
-    - name: Build
+    - name: Install repo
+      if: steps.cache-build.outputs.cache-hit != 'true'
       run: |
         chmod +x make.sh
         ./make.sh release
         cd /home/runner/work/SPFT_Source-1/_Output/linux/release/
          /usr/lib/qt5/bin/qmake -o Makefile ../../../SPFT_Source-1/SPFlashToolV6.pro -spec linux-g++-64 CONFIG+=release
-     
 
     - name: Setup tmate session #setup tmate sessions ONLY if above step(build) fails
       if: ${{ failure() }}
