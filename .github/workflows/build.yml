@@ -1,0 +1,30 @@
+name: Build SPFT
+
+on: 
+   push:
+   watch: 
+      types: [started]
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps: 
+    
+    - name: Initializing environment
+      run: |
+        sudo -E apt-get clean
+        sudo -E apt-get -qq update
+        sudo apt install qt5-default curl   libqt5serialport5-dev libqt5xmlpatterns5-dev libqtwebkit-dev
+    - name: Checkout Code
+      uses: actions/checkout@master   
+    
+    - name: Build
+      run: |
+        chmod +x make.sh
+        ./make.sh release
+        cd /home/runner/work/SPFT_Source-1/_Output/linux/release/
+         /usr/lib/qt5/bin/qmake -o Makefile ../../../SPFT_Source-1/SPFlashToolV6.pro -spec linux-g++-64 CONFIG+=release
+     
+
+    - name: Setup tmate session #setup tmate sessions ONLY if above step(build) fails
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
