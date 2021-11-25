@@ -43,3 +43,8 @@ jobs:
     - name: Setup tmate session #setup tmate sessions ONLY if above step(build) fails
       if: ${{ failure() }}
       uses: mxschmitt/action-tmate@v3
+      
+    - uses: actions/upload-artifact@v2
+      with:
+          name: SPFT V6.xx
+          path: /home/runner/work/SPFT_Source/_Output/linux/release/*/*.zip   
