@@ -1,5 +1,5 @@
 # tools
-QMAKE                         := /opt/Qt5.14.2/5.14.2/gcc_64/bin/qmake
+QMAKE                         := qmake
 RM                            := rm
 MKDIR                         := mkdir
 CDDIR                         := cd
