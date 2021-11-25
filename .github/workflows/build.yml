@@ -47,4 +47,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
           name: SPFT V6.xx
-          path: /home/runner/work/SPFT_Source/_Output/linux/release/*/*.zip   
+          path: /home/runner/work/SPFT_Source/_Output/linux/release/  
